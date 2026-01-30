@@ -12,11 +12,6 @@ services:
   runtime: docker
   plan: standard
   dockerfilePath: ./server/Dockerfile
-  startCommand: |
-    curl -s -X POST 'http://posthog-clickhouse:8123/?query=CREATE%20DATABASE%20IF%20NOT%20EXISTS%20posthog' || true
-    curl -s -X POST 'http://posthog-clickhouse:8123/?query=CREATE%20TABLE%20IF%20NOT%20EXISTS%20posthog.infi_clickhouse_orm_migrations%20(package_name%20String,%20module_name%20String,%20applied%20Date)%20ENGINE%20=%20MergeTree(applied,%20(package_name,%20module_name),%208192)' || true
-    ./bin/docker-migrate
-    ./bin/docker-server
   envVars:
   - key: IS_BEHIND_PROXY
     value: 1
