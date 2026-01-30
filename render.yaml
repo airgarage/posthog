@@ -167,9 +167,9 @@ services:
 
 - type: pserv
   name: posthog-zookeeper
-  env: docker
+  env: image
   plan: standard
-  image: zookeeper:3.7.0
+  image: "zookeeper:3.7.0"
   disk:
     name: zookeeper-data
     mountPath: /data
@@ -177,9 +177,9 @@ services:
 
 - type: pserv
   name: posthog-kafka
-  env: docker
+  env: image
   plan: standard
-  image: docker.redpanda.com/redpandadata/redpanda:v25.1.9
+  image: "docker.redpanda.com/redpandadata/redpanda:v25.1.9"
   startCommand: redpanda start --mode dev-container --kafka-addr internal://0.0.0.0:9092 --advertise-kafka-addr internal://posthog-kafka:9092
   disk:
     name: kafka-data
@@ -188,9 +188,9 @@ services:
 
 - type: pserv
   name: posthog-clickhouse
-  env: docker
+  env: image
   plan: standard
-  image: clickhouse/clickhouse-server:25.8.12.129
+  image: "clickhouse/clickhouse-server:25.8.12.129"
   disk:
     name: clickhouse-data
     mountPath: /var/lib/clickhouse
