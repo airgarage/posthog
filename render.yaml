@@ -182,7 +182,6 @@ services:
   plan: standard
   dockerfilePath: ./kafka/Dockerfile
   dockerContext: .
-  startCommand: redpanda start --mode dev-container --kafka-addr internal://0.0.0.0:9092 --advertise-kafka-addr internal://posthog-kafka:9092
   disk:
     name: kafka-data
     mountPath: /var/lib/redpanda/data
