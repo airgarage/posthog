@@ -11,5 +11,5 @@ ENV POSTHOG_REDIS_PORT=$POSTHOG_REDIS_PORT
 ENV SECRET_KEY=$SECRET_KEY
 
 
-COPY start-render.sh ./bin/start-render.sh
+COPY server/start-render.sh ./bin/start-render.sh
 CMD ["./bin/start-render.sh"]
