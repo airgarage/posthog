@@ -47,6 +47,8 @@ services:
     value: posthog
   - key: CLICKHOUSE_PASSWORD
     value: posthog
+  - key: CLICKHOUSE_SECURE
+    value: "false"
   - key: CLICKHOUSE_API_USER
     value: posthog
   - key: CLICKHOUSE_API_PASSWORD
@@ -108,6 +110,8 @@ services:
     value: posthog
   - key: CLICKHOUSE_PASSWORD
     value: posthog
+  - key: CLICKHOUSE_SECURE
+    value: "false"
   - key: CLICKHOUSE_API_USER
     value: posthog
   - key: CLICKHOUSE_API_PASSWORD
@@ -154,6 +158,8 @@ services:
     value: posthog
   - key: CLICKHOUSE_PASSWORD
     value: posthog
+  - key: CLICKHOUSE_SECURE
+    value: "false"
   - key: CLICKHOUSE_API_USER
     value: posthog
   - key: CLICKHOUSE_API_PASSWORD
@@ -204,5 +210,7 @@ services:
     value: posthog
   - key: CLICKHOUSE_PASSWORD
     value: posthog
+  - key: CLICKHOUSE_SECURE
+    value: "false"
   - key: CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT
     value: "1"
