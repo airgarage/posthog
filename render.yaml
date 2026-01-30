@@ -10,6 +10,7 @@ services:
 - type: web
   name: posthog
   env: docker
+  plan: standard
   dockerfilePath: ./server/Dockerfile
   dockerContext: ./server
   autoDeploy: false
@@ -42,6 +43,7 @@ services:
 - type: pserv
   name: posthog-redis
   env: docker
+  plan: standard
   autoDeploy: false
   repo: https://github.com/render-examples/redis.git
   disk:
@@ -52,6 +54,7 @@ services:
 - type: worker
   name: posthog-worker
   env: docker
+  plan: standard
   dockerfilePath: ./worker/Dockerfile
   dockerContext: ./worker
   numInstances: 1
@@ -83,6 +86,7 @@ services:
 - type: worker
   name: posthog-plugin-server
   env: docker
+  plan: standard
   dockerfilePath: ./plugin-server/Dockerfile
   dockerContext: ./plugin-server
   numInstances: 1
