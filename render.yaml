@@ -9,7 +9,7 @@ databases:
 services:
 - type: web
   name: posthog
-  env: docker
+  runtime: docker
   plan: standard
   dockerfilePath: ./server/Dockerfile
   dockerContext: ./server
@@ -60,7 +60,7 @@ services:
 
 - type: pserv
   name: posthog-redis
-  env: docker
+  runtime: docker
   plan: standard
   autoDeploy: false
   repo: https://github.com/render-examples/redis.git
@@ -71,7 +71,7 @@ services:
 
 - type: worker
   name: posthog-worker
-  env: docker
+  runtime: docker
   plan: standard
   dockerfilePath: ./worker/Dockerfile
   dockerContext: ./worker
@@ -121,7 +121,7 @@ services:
 
 - type: worker
   name: posthog-plugin-server
-  env: docker
+  runtime: docker
   plan: standard
   dockerfilePath: ./plugin-server/Dockerfile
   dockerContext: ./plugin-server
@@ -167,9 +167,10 @@ services:
 
 - type: pserv
   name: posthog-zookeeper
-  env: image
+  runtime: docker
   plan: standard
-  image: "zookeeper:3.7.0"
+  dockerfilePath: ./zookeeper/Dockerfile
+  dockerContext: .
   disk:
     name: zookeeper-data
     mountPath: /data
@@ -177,9 +178,10 @@ services:
 
 - type: pserv
   name: posthog-kafka
-  env: image
+  runtime: docker
   plan: standard
-  image: "docker.redpanda.com/redpandadata/redpanda:v25.1.9"
+  dockerfilePath: ./kafka/Dockerfile
+  dockerContext: .
   startCommand: redpanda start --mode dev-container --kafka-addr internal://0.0.0.0:9092 --advertise-kafka-addr internal://posthog-kafka:9092
   disk:
     name: kafka-data
@@ -188,9 +190,10 @@ services:
 
 - type: pserv
   name: posthog-clickhouse
-  env: image
+  runtime: docker
   plan: standard
-  image: "clickhouse/clickhouse-server:25.8.12.129"
+  dockerfilePath: ./clickhouse/Dockerfile
+  dockerContext: .
   disk:
     name: clickhouse-data
     mountPath: /var/lib/clickhouse
