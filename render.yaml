@@ -4,6 +4,7 @@ databases:
   user: posthog
   plan: basic-1gb # PostHog can quickly use up hundreds of MBs of disk space, depending on the volume of analytics
   diskSizeGB: 20
+  postgresMajorVersion: "14"
 
 services:
 - type: web
