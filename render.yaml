@@ -39,6 +39,24 @@ services:
     value: render
   - key: SKIP_SERVICE_VERSION_REQUIREMENTS
     value: "1"
+  - key: CLICKHOUSE_HOST
+    value: posthog-clickhouse
+  - key: CLICKHOUSE_DATABASE
+    value: posthog
+  - key: CLICKHOUSE_USER
+    value: posthog
+  - key: CLICKHOUSE_PASSWORD
+    value: posthog
+  - key: CLICKHOUSE_API_USER
+    value: posthog
+  - key: CLICKHOUSE_API_PASSWORD
+    value: posthog
+  - key: CLICKHOUSE_APP_USER
+    value: posthog
+  - key: CLICKHOUSE_APP_PASSWORD
+    value: posthog
+  - key: KAFKA_HOSTS
+    value: posthog-kafka:9092
 
 - type: pserv
   name: posthog-redis
@@ -82,6 +100,24 @@ services:
     value: render
   - key: SKIP_SERVICE_VERSION_REQUIREMENTS
     value: "1"
+  - key: CLICKHOUSE_HOST
+    value: posthog-clickhouse
+  - key: CLICKHOUSE_DATABASE
+    value: posthog
+  - key: CLICKHOUSE_USER
+    value: posthog
+  - key: CLICKHOUSE_PASSWORD
+    value: posthog
+  - key: CLICKHOUSE_API_USER
+    value: posthog
+  - key: CLICKHOUSE_API_PASSWORD
+    value: posthog
+  - key: CLICKHOUSE_APP_USER
+    value: posthog
+  - key: CLICKHOUSE_APP_PASSWORD
+    value: posthog
+  - key: KAFKA_HOSTS
+    value: posthog-kafka:9092
 
 - type: worker
   name: posthog-plugin-server
@@ -109,4 +145,62 @@ services:
   - key: DEPLOYMENT
     value: render
   - key: SKIP_SERVICE_VERSION_REQUIREMENTS
+    value: "1"
+  - key: CLICKHOUSE_HOST
+    value: posthog-clickhouse
+  - key: CLICKHOUSE_DATABASE
+    value: posthog
+  - key: CLICKHOUSE_USER
+    value: posthog
+  - key: CLICKHOUSE_PASSWORD
+    value: posthog
+  - key: CLICKHOUSE_API_USER
+    value: posthog
+  - key: CLICKHOUSE_API_PASSWORD
+    value: posthog
+  - key: CLICKHOUSE_APP_USER
+    value: posthog
+  - key: CLICKHOUSE_APP_PASSWORD
+    value: posthog
+  - key: KAFKA_HOSTS
+    value: posthog-kafka:9092
+
+- type: pserv
+  name: posthog-zookeeper
+  env: docker
+  plan: standard
+  image: zookeeper:3.7.0
+  disk:
+    name: zookeeper-data
+    mountPath: /data
+    sizeGB: 10
+
+- type: pserv
+  name: posthog-kafka
+  env: docker
+  plan: standard
+  image: docker.redpanda.com/redpandadata/redpanda:v25.1.9
+  startCommand: redpanda start --mode dev-container --kafka-addr internal://0.0.0.0:9092 --advertise-kafka-addr internal://posthog-kafka:9092
+  disk:
+    name: kafka-data
+    mountPath: /var/lib/redpanda/data
+    sizeGB: 10
+
+- type: pserv
+  name: posthog-clickhouse
+  env: docker
+  plan: standard
+  image: clickhouse/clickhouse-server:25.8.12.129
+  disk:
+    name: clickhouse-data
+    mountPath: /var/lib/clickhouse
+    sizeGB: 20
+  envVars:
+  - key: CLICKHOUSE_DB
+    value: posthog
+  - key: CLICKHOUSE_USER
+    value: posthog
+  - key: CLICKHOUSE_PASSWORD
+    value: posthog
+  - key: CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT
     value: "1"
