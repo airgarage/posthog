@@ -36,6 +36,8 @@ services:
     generateValue: true
   - key: DEPLOYMENT
     value: render
+  - key: SKIP_SERVICE_VERSION_REQUIREMENTS
+    value: "1"
 
 - type: pserv
   name: posthog-redis
@@ -75,6 +77,8 @@ services:
     generateValue: true
   - key: DEPLOYMENT
     value: render
+  - key: SKIP_SERVICE_VERSION_REQUIREMENTS
+    value: "1"
 
 - type: worker
   name: posthog-plugin-server
@@ -100,3 +104,5 @@ services:
       property: connectionString
   - key: DEPLOYMENT
     value: render
+  - key: SKIP_SERVICE_VERSION_REQUIREMENTS
+    value: "1"
